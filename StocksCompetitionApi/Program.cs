@@ -1,7 +1,12 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
+using StocksCompetitionCore.Models.Environment;
+using StocksCompetitionInfrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var environmentSettings = builder.Configuration.GetRequiredSection("EnvironmentSettings").Get<EnvironmentSettings>()
+    ?? throw new Exception("Environment settings could not be loaded");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -18,6 +23,10 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlFilepath);
 });
 
+builder.Services.AddInfrastructureServices(environmentSettings);
+
+builder.Services.AddAuthorization();
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -30,6 +39,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

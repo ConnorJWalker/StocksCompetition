@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetitionApi", "StocksCompetitionApi\StocksCompetitionApi.csproj", "{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetitionCore", "StocksCompetitionCore\StocksCompetitionCore.csproj", "{2B848571-A0A0-4463-BF91-2C8003F4FCF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetitionInfrastructure", "StocksCompetitionInfrastructure\StocksCompetitionInfrastructure.csproj", "{EB4CF549-023B-44E6-80AE-582EC0E2B676}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B848571-A0A0-4463-BF91-2C8003F4FCF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B848571-A0A0-4463-BF91-2C8003F4FCF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B848571-A0A0-4463-BF91-2C8003F4FCF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B848571-A0A0-4463-BF91-2C8003F4FCF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB4CF549-023B-44E6-80AE-582EC0E2B676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB4CF549-023B-44E6-80AE-582EC0E2B676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB4CF549-023B-44E6-80AE-582EC0E2B676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB4CF549-023B-44E6-80AE-582EC0E2B676}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
