@@ -33,4 +33,9 @@ public class ApplicationUser : IdentityUser<int>
     /// </summary>
     [DefaultValue(false)]
     public bool IsAdmin { get; init; }
+    
+    /// <summary>
+    /// Collection of refresh tokens belonging to the user
+    /// </summary>
+    public IEnumerable<RefreshToken>? RefreshTokens { get; init; }
 }

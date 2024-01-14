@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace StocksCompetitionCore.Models.DataTransferObjects.Requests;
+namespace StocksCompetitionCore.Models.DataTransferObjects.Requests.Authentication;
 
 /// <summary>
 /// Request content format for sign up requests

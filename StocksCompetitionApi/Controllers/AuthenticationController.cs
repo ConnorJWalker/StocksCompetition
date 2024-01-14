@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StocksCompetitionCore.Models.DataTransferObjects.Requests;
+using StocksCompetitionCore.Models.DataTransferObjects.Requests.Authentication;
 using StocksCompetitionCore.Models.DataTransferObjects.Responses;
 using StocksCompetitionCore.Services;
 
@@ -56,12 +56,19 @@ public class AuthenticationController : ExtendedControllerBase
     }
 
     /// <summary>
-    /// Invalidates user's jwt replacing with new token
+    /// Invalidates user's jwt replacing with new access and refresh tokens if the provided
+    /// refresh token is valid
     /// </summary>
+    /// <param name="refreshToken">Token previously given to refresh access and refresh token</param>
     [HttpPost]
-    public async Task<IActionResult> RefreshToken()
+    [ProducesResponseType(typeof(AuthenticationResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> Refresh([FromBody] RefreshRequest refreshToken)
     {
-        return NoContent();
+        var result = await _authenticationService.Refresh(refreshToken.RefreshToken);
+        return result.Success 
+            ? Ok(result.Content) 
+            : ErrorResponseFromResult(result);
     }
 
     /// <summary>

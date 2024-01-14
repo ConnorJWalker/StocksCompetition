@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace StocksCompetitionCore.Models.DataTransferObjects.Requests;
+namespace StocksCompetitionCore.Models.DataTransferObjects.Requests.Authentication;
 
 /// <summary>
 /// Request content format for sign up requests
@@ -11,11 +11,11 @@ public record LogInRequest
     /// The email address linked to the account to attempt log in for
     /// </summary>
     [Required]
-    public required string Email { get; set; }
+    public required string Email { get; init; }
 
     /// <summary>
     /// The email address linked to the account to attempt log in for
     /// </summary>
     [Required]
-    public required string Password { get; set; }
+    public required string Password { get; init; }
 }

@@ -9,6 +9,8 @@ internal class StocksCompetitionDbContext : IdentityDbContext<ApplicationUser, I
 {
     public StocksCompetitionDbContext(DbContextOptions<StocksCompetitionDbContext> options) : base(options) { }
 
+    public required DbSet<RefreshToken> RefreshTokens { get; init; }
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<ApplicationUser>(entityBuilder =>

@@ -26,6 +26,7 @@ public class ExtendedControllerBase : Controller
         return result.ErrorCode switch
         {
             400 => BadRequest(result.ErrorMessage),
+            401 => Unauthorized(result.ErrorMessage),
             404 => NotFound(result.ErrorMessage),
             409 => Conflict(result.ErrorMessage),
             _ => StatusCode(500, result.ErrorMessage)

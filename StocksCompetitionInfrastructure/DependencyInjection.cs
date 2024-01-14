@@ -6,19 +6,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using StocksCompetitionCore.Entities;
 using StocksCompetitionCore.Models.Environment;
+using StocksCompetitionCore.Repositories;
 using StocksCompetitionCore.Services;
+using StocksCompetitionInfrastructure.Repositories;
 using StocksCompetitionInfrastructure.Services;
 
 namespace StocksCompetitionInfrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, EnvironmentSettings environmentSettings)
+    public static void AddInfrastructureServices(this IServiceCollection services, EnvironmentSettings environmentSettings)
     {
         AddAuthentication(services, environmentSettings);
         AddServices(services, environmentSettings);
-        
-        return services;
     }
     
     private static void AddAuthentication(IServiceCollection services, EnvironmentSettings environmentSettings)
@@ -47,6 +47,8 @@ public static class DependencyInjection
     private static void AddServices(IServiceCollection services, EnvironmentSettings environmentSettings)
     {
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+        services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         
         services.AddSingleton(environmentSettings);
         

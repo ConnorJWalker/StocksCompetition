@@ -19,7 +19,22 @@ public record JwtSettings
     public required string Audience { get; init; }
 
     /// <summary>
-    /// Key string used for validating the tokens signature
+    /// Key string used for validating the access tokens signature
     /// </summary>
     public required string Key { get; init; }
+    
+    /// <summary>
+    /// Key string used for validating the refresh tokens signature
+    /// </summary>
+    public required string RefreshKey { get; init; }
+    
+    /// <summary>
+    /// Duration that an access token is valid for before requiring a refresh in minutes
+    /// </summary>
+    public required int AccessTokenLifetimeMinutes { get; init; }
+    
+    /// <summary>
+    /// Duration that a refresh token is valid for before requiring re-authentication in days
+    /// </summary>
+    public required int RefreshTokenLifetimeDays { get; init; }
 }
