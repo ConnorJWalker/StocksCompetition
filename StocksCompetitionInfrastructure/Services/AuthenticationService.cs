@@ -17,6 +17,8 @@ internal class AuthenticationService : IAuthenticationService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly EnvironmentSettings _environmentSettings;
+
+    private static readonly string _logInErrorMessage = "Email or Password is incorrect";
     
     public AuthenticationService(UserManager<ApplicationUser> userManager, EnvironmentSettings environmentSettings)
     {
@@ -46,6 +48,20 @@ internal class AuthenticationService : IAuthenticationService
         return userCreatedResult.Succeeded
             ? Result<AuthenticationResponse>.FromSuccess(GenerateTokens(user))
             : Result<AuthenticationResponse>.FromFailed(500, "Could not create user account");
+    }
+
+    /// <inheritdoc />
+    public async Task<Result<AuthenticationResponse>> LogIn(LogInRequest logInRequest)
+    {
+        var user = await _userManager.FindByEmailAsync(logInRequest.Email); 
+        if (user is null)
+        {
+            return Result<AuthenticationResponse>.FromFailed(401, _logInErrorMessage);
+        }
+
+        return await _userManager.CheckPasswordAsync(user, logInRequest.Password)
+            ? Result<AuthenticationResponse>.FromSuccess(GenerateTokens(user))
+            : Result<AuthenticationResponse>.FromFailed(401, _logInErrorMessage);
     }
 
     private AuthenticationResponse GenerateTokens(ApplicationUser user)
