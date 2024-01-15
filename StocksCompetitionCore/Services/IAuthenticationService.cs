@@ -37,7 +37,8 @@ public interface IAuthenticationService
     /// Invalidates the passed refresh token family and stores the current access token in cache
     /// to prevent it being reused after the log out is requested
     /// </summary>
-    /// <param name="authenticationTokens">Object containing the access and refresh tokens to be invalidated</param>
+    /// <param name="accessToken">The token used by the user to access authorised endpoints to invalidate</param>
+    /// <param name="refreshToken">The token generated to refresh the given access token to invalidate</param>
     /// <returns>Result object containing a boolean for success</returns>
-    public Task<Result<bool>> LogOut(AuthenticationResponse authenticationTokens);
+    public Task<Result<bool>> Invalidate(string accessToken, string refreshToken);
 }

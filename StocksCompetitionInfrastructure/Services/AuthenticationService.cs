@@ -125,17 +125,17 @@ internal class AuthenticationService : IAuthenticationService
     }
 
     /// <inheritdoc />
-    public async Task<Result<bool>> LogOut(AuthenticationResponse authenticationTokens)
+    public async Task<Result<bool>> Invalidate(string accessToken, string refreshToken)
     {
-        var storedRefreshToken = await _refreshTokenRepository.GetByToken(authenticationTokens.RefreshToken);
+        var storedRefreshToken = await _refreshTokenRepository.GetByToken(refreshToken);
         if (storedRefreshToken is null)
         {
-            return Result<bool>.FromFailed(418, "Refresh token could not be found");
+            return Result<bool>.FromFailed(401, "Refresh token could not be found");
         }
         
         await _refreshTokenRepository.InvalidateFamily(storedRefreshToken.Family);
         _memoryCache.Set(
-            $"logged-out-{authenticationTokens.AccessToken}",
+            $"logged-out-{accessToken}",
             string.Empty,
             TimeSpan.FromMinutes(_environmentSettings.Jwt.AccessTokenLifetimeMinutes)
         );
