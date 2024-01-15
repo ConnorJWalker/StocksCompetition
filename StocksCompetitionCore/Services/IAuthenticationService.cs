@@ -32,4 +32,12 @@ public interface IAuthenticationService
     /// <param name="refreshToken">Refresh token to validate and refresh</param>
     /// <returns>Result object containing refreshed access and refresh tokens</returns>
     public Task<Result<AuthenticationResponse>> Refresh(string refreshToken);
+
+    /// <summary>
+    /// Invalidates the passed refresh token family and stores the current access token in cache
+    /// to prevent it being reused after the log out is requested
+    /// </summary>
+    /// <param name="authenticationTokens">Object containing the access and refresh tokens to be invalidated</param>
+    /// <returns>Result object containing a boolean for success</returns>
+    public Task<Result<bool>> LogOut(AuthenticationResponse authenticationTokens);
 }

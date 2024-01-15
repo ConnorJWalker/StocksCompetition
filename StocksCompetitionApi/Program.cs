@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.OpenApi.Models;
 using StocksCompetitionCore.Models.Environment;
 using StocksCompetitionInfrastructure;
+using StocksCompetitionInfrastructure.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<RejectLoggedOutUsersMiddleware>();
 
 app.MapControllers();
 

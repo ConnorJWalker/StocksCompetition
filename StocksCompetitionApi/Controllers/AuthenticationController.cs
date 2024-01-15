@@ -72,12 +72,19 @@ public class AuthenticationController : ExtendedControllerBase
     }
 
     /// <summary>
-    /// Invalidates users current jwt family
+    /// Invalidates users current jwt family and adds the current access token to cache to prevent it from being
+    /// used for future authorised endpoint access
     /// </summary>
+    /// <param name="authenticationTokens">The user's current access and refresh tokens to invalidate</param>
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> LogOut()
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> LogOut([FromBody] AuthenticationResponse authenticationTokens)
     {
-        return NoContent();
+        var result = await _authenticationService.LogOut(authenticationTokens);
+        return result.Success
+            ? Ok()
+            : ErrorResponseFromResult(result);
     }
 }

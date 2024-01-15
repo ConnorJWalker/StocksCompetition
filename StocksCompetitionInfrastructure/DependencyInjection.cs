@@ -23,6 +23,14 @@ public static class DependencyInjection
     
     private static void AddAuthentication(IServiceCollection services, EnvironmentSettings environmentSettings)
     {
+        services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
+        {
+            options.Password.RequireDigit = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = false;
+        })
+        .AddEntityFrameworkStores<StocksCompetitionDbContext>();
+
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -46,21 +54,14 @@ public static class DependencyInjection
 
     private static void AddServices(IServiceCollection services, EnvironmentSettings environmentSettings)
     {
+        services.AddMemoryCache();
+        
         services.AddScoped<IAuthenticationService, AuthenticationService>();
 
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
-        
         services.AddSingleton(environmentSettings);
         
         services.AddDbContext<StocksCompetitionDbContext>(options 
             => options.UseNpgsql($"Host={environmentSettings.Database.Host};Database={environmentSettings.Database.Database};Username={environmentSettings.Database.User};Password={environmentSettings.Database.Password}"));
-
-        services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
-        {
-            options.Password.RequireDigit = false;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequireUppercase = false;
-        })
-        .AddEntityFrameworkStores<StocksCompetitionDbContext>();
     }
 }

@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using StocksCompetitionCore.Entities;
 using StocksCompetitionCore.Models;
@@ -19,16 +20,18 @@ internal class AuthenticationService : IAuthenticationService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly EnvironmentSettings _environmentSettings;
     private readonly IRefreshTokenRepository _refreshTokenRepository;
-
+    private readonly IMemoryCache _memoryCache;
+    
     private const string LogInErrorMessage = "Email or Password is incorrect";
     private const string RefreshErrorMessage = "Could not refresh token";
     
     public AuthenticationService(UserManager<ApplicationUser> userManager, EnvironmentSettings environmentSettings,
-        IRefreshTokenRepository refreshTokenRepository)
+        IRefreshTokenRepository refreshTokenRepository, IMemoryCache memoryCache)
     {
         _userManager = userManager;
         _environmentSettings = environmentSettings;
         _refreshTokenRepository = refreshTokenRepository;
+        _memoryCache = memoryCache;
     }
     
     /// <inheritdoc />
@@ -80,7 +83,8 @@ internal class AuthenticationService : IAuthenticationService
 
         return Result<AuthenticationResponse>.FromSuccess(tokens);
     }
-
+    
+    /// <inheritdoc />
     public async Task<Result<AuthenticationResponse>> Refresh(string refreshToken)
     {
         var storedRefreshToken = await _refreshTokenRepository.GetByToken(refreshToken);
@@ -120,6 +124,25 @@ internal class AuthenticationService : IAuthenticationService
         return Result<AuthenticationResponse>.FromSuccess(newTokens);
     }
 
+    /// <inheritdoc />
+    public async Task<Result<bool>> LogOut(AuthenticationResponse authenticationTokens)
+    {
+        var storedRefreshToken = await _refreshTokenRepository.GetByToken(authenticationTokens.RefreshToken);
+        if (storedRefreshToken is null)
+        {
+            return Result<bool>.FromFailed(418, "Refresh token could not be found");
+        }
+        
+        await _refreshTokenRepository.InvalidateFamily(storedRefreshToken.Family);
+        _memoryCache.Set(
+            $"logged-out-{authenticationTokens.AccessToken}",
+            string.Empty,
+            TimeSpan.FromMinutes(_environmentSettings.Jwt.AccessTokenLifetimeMinutes)
+        );
+        
+        return Result<bool>.FromSuccess(true);
+    }
+    
     /// <summary>
     /// Generates access and refresh tokens containing user claims
     /// </summary>
