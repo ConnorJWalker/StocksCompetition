@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using JetBrains.Annotations;
 
 namespace StocksCompetitionCore.Models.DataTransferObjects.Requests.Authentication;
 
@@ -48,6 +49,7 @@ public record SignUpRequest
     /// Confirmation of password field to ensure password was entered correctly
     /// </summary>
     [Required]
+    [UsedImplicitly]
     [Compare("Password", ErrorMessage = "Passwords must match")]
     public required string PasswordConfirm { get; init; }
 }

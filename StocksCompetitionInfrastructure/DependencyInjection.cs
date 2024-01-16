@@ -55,9 +55,10 @@ public static class DependencyInjection
     private static void AddServices(IServiceCollection services, EnvironmentSettings environmentSettings)
     {
         services.AddMemoryCache();
-        
-        services.AddScoped<IAuthenticationService, AuthenticationService>();
 
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
+        
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         services.AddSingleton(environmentSettings);
         

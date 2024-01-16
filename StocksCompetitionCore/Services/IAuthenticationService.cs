@@ -11,14 +11,6 @@ namespace StocksCompetitionCore.Services;
 public interface IAuthenticationService
 {
     /// <summary>
-    /// Creates a new user in the database and creates authentication tokens containing the user's sign up
-    /// information, if account doesn't already exist
-    /// </summary>
-    /// <param name="signUpRequest">Validated user sign up form</param>
-    /// <returns>Result object containing access and refresh tokens</returns>
-    public Task<Result<AuthenticationResponse>> SignUp(SignUpRequest signUpRequest);
- 
-    /// <summary>
     /// Validates user's log in request and creates authentication tokens containing the user's information
     /// stored in the database
     /// </summary>

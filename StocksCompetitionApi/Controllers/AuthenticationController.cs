@@ -7,7 +7,7 @@ using StocksCompetitionCore.Services;
 namespace StocksCompetitionApi.Controllers;
 
 /// <summary>
-/// Controller containing endpoints for creating and authenticating users
+/// Controller containing endpoints for creating, refreshing and rejecting authentication tokens
 /// </summary>
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
@@ -25,25 +25,11 @@ public class AuthenticationController : ExtendedControllerBase
     }
     
     /// <summary>
-    /// Validates user's signup request, creating new account and jwt if valid
-    /// </summary>
-    /// <param name="signUpRequest">Object containing user's signup details</param>
-    [HttpPost]
-    [ProducesResponseType(typeof(AuthenticationResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> SignUp([FromBody] SignUpRequest signUpRequest)
-    {
-        var result = await _authenticationService.SignUp(signUpRequest);
-        return result.Success 
-            ? Ok(result.Content) 
-            : ErrorResponseFromResult(result);
-    }
-
-    /// <summary>
     /// Validates user's email and password against stored details, generating a new jwt if valid
     /// </summary>
     /// <param name="logInRequest">Object containing user's log in details</param>
     [HttpPost]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(AuthenticationResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -61,6 +47,7 @@ public class AuthenticationController : ExtendedControllerBase
     /// </summary>
     /// <param name="refreshToken">Token previously given to refresh access and refresh token</param>
     [HttpPost]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(AuthenticationResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest refreshToken)

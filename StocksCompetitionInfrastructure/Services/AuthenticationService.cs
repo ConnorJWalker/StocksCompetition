@@ -35,36 +35,6 @@ internal class AuthenticationService : IAuthenticationService
     }
     
     /// <inheritdoc />
-    public async Task<Result<AuthenticationResponse>> SignUp(SignUpRequest signUpRequest)
-    {
-        if (await _userManager.FindByEmailAsync(signUpRequest.Email) is not null)
-        {
-            return Result<AuthenticationResponse>.FromFailed(400, $"User with email {signUpRequest.Email} already exists");
-        }
-
-        var user = new ApplicationUser
-        {
-            DisplayName = signUpRequest.DisplayName,
-            ProfilePicture = "TODO: profile pictures",
-            DisplayColour = signUpRequest.DisplayColour,
-            Email = signUpRequest.Email,
-            UserName = signUpRequest.UserName
-        };
-        
-        var userCreatedResult = await _userManager.CreateAsync(user, signUpRequest.Password);
-
-        if (!userCreatedResult.Succeeded)
-        {
-            return Result<AuthenticationResponse>.FromFailed(500, "Could not create user account");
-        }
-
-        var tokens = GenerateTokens(user);
-        await _refreshTokenRepository.Create(tokens.RefreshToken, user.Id, Guid.NewGuid());
-
-        return Result<AuthenticationResponse>.FromSuccess(tokens);
-    }
-
-    /// <inheritdoc />
     public async Task<Result<AuthenticationResponse>> LogIn(LogInRequest logInRequest)
     {
         var user = await _userManager.FindByEmailAsync(logInRequest.Email); 
