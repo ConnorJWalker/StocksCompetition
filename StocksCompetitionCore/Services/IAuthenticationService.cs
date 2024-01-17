@@ -33,4 +33,11 @@ public interface IAuthenticationService
     /// <param name="refreshToken">The token generated to refresh the given access token to invalidate</param>
     /// <returns>Result object containing a boolean for success</returns>
     public Task<Result<bool>> Invalidate(string accessToken, string refreshToken);
+
+    /// <summary>
+    /// Invalidates all refresh tokens belonging to the passes user, storing their id and logout time
+    /// in cache to prevent previously issued access tokens being used for authentication
+    /// </summary>
+    /// <param name="userId">The id of the user to invalid tokens for</param>
+    public Task InvalidateAllTokensForUser(int userId);
 }

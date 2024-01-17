@@ -49,4 +49,11 @@ internal class RefreshTokenRepository : IRefreshTokenRepository
             .Where(refresh => refresh.Family == family)
             .ExecuteUpdateAsync(properties => properties.SetProperty(refresh => refresh.Valid, false));
     }
+
+    public async Task InvalidateAllTokensForUser(int userId)
+    {
+        await _databaseContext.RefreshTokens
+            .Where(refresh => refresh.UserId == userId)
+            .ExecuteUpdateAsync(properties => properties.SetProperty(refresh => refresh.Valid, false));
+    }
 }

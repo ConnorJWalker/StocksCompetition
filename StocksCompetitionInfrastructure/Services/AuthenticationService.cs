@@ -112,6 +112,17 @@ internal class AuthenticationService : IAuthenticationService
         
         return Result<bool>.FromSuccess(true);
     }
+
+    /// <inheritdoc />
+    public async Task InvalidateAllTokensForUser(int userId)
+    {
+        await _refreshTokenRepository.InvalidateAllTokensForUser(userId);
+        _memoryCache.Set(
+            $"logged-out-all-{userId}",
+            DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+            TimeSpan.FromMinutes(_environmentSettings.Jwt.AccessTokenLifetimeMinutes)
+        );
+    }
     
     /// <summary>
     /// Generates access and refresh tokens containing user claims
@@ -122,6 +133,7 @@ internal class AuthenticationService : IAuthenticationService
     {
         var claims = new List<Claim>
         {
+            new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
             new("Id", user.Id.ToString()),
             new("DisplayName", user.DisplayName),
             new("UserName", user.UserName!),

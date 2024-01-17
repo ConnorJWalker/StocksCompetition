@@ -33,4 +33,10 @@ public interface IRefreshTokenRepository
     /// </summary>
     /// <param name="family">Guid of the family to invalidate</param>
     public Task InvalidateFamily(Guid family);
+
+    /// <summary>
+    /// Marks all stored refresh tokens belonging to the passed user as invalid
+    /// </summary>
+    /// <param name="userId">The id of the user to invalid all refresh tokens for</param>
+    public Task InvalidateAllTokensForUser(int userId);
 }

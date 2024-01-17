@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StocksCompetitionCore.Models.DataTransferObjects.Requests.Authentication;
@@ -63,16 +64,36 @@ public class AuthenticationController : ExtendedControllerBase
     /// used for future authorised endpoint access
     /// </summary>
     /// <param name="refreshToken">The user's current refresh tokens to invalidate</param>
+    /// <param name="authorization">The bearer token to log out</param>
     [HttpPost]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> LogOut([FromBody] RefreshTokenRequest refreshToken)
+    public async Task<IActionResult> LogOut([FromHeader] string authorization, [FromBody] RefreshTokenRequest refreshToken)
     {
         // Remove "Bearer" from the authorization header
-        var accessToken = Request.Headers.Authorization.ToString().Split(" ")[1];
+        var accessToken = authorization.Split(" ")[1];
         var result = await _authenticationService.Invalidate(accessToken, refreshToken.Token);
         
         return result.Success ? Ok() : ErrorResponseFromResult(result);
+    }
+
+    /// <summary>
+    /// Invalidates all access and refresh tokens belonging to the user
+    /// </summary>
+    [HttpPost]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> LogOutAll()
+    {
+        var userIdString = User.FindFirstValue("Id");
+        if (string.IsNullOrWhiteSpace(userIdString) || !int.TryParse(userIdString, out var userId))
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+        
+        await _authenticationService.InvalidateAllTokensForUser(userId);
+        return Ok();
     }
 }
