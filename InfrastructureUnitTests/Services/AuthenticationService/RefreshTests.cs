@@ -155,16 +155,7 @@ public class RefreshTests
         Assert.Equal(ErrorMessage, result.ErrorMessage);
         Received.InOrder(() => _refreshTokenRepository.Received().InvalidateFamily(Arg.Is<Guid>(received => received == family)));
     }
-
-    private static RefreshToken GetRefreshToken(bool valid, Guid family) => new RefreshToken
-    {
-        Id = 1,
-        UserId = 1,
-        Token = "Token",
-        Family = family,
-        Valid = valid
-    };
-
+    
     private static string GetRefreshTokenString(bool withId)
     {
         var token = new JwtSecurityToken(

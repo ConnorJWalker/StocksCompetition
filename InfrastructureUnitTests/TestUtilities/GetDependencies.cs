@@ -23,4 +23,13 @@ internal static class GetDependencies
         DisplayColour = "#d94eb8",
         IsAdmin = false
     };
+    
+    public static RefreshToken GetRefreshToken(bool valid, Guid family) => new RefreshToken
+    {
+        Id = 1,
+        UserId = 1,
+        Token = "Token",
+        Family = family,
+        Valid = valid
+    };
 }
