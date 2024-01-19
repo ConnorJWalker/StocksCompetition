@@ -6,6 +6,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetitionCore", "St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetitionInfrastructure", "StocksCompetitionInfrastructure\StocksCompetitionInfrastructure.csproj", "{EB4CF549-023B-44E6-80AE-582EC0E2B676}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{FCBF34D4-E147-4C38-A930-C4E036800E74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8451E7F4-3103-46E5-8687-AE8E61F48648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureUnitTests", "InfrastructureUnitTests\InfrastructureUnitTests.csproj", "{77ED1699-FF19-4456-B6FA-EDF199D23D06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +30,15 @@ Global
 		{EB4CF549-023B-44E6-80AE-582EC0E2B676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB4CF549-023B-44E6-80AE-582EC0E2B676}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB4CF549-023B-44E6-80AE-582EC0E2B676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77ED1699-FF19-4456-B6FA-EDF199D23D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77ED1699-FF19-4456-B6FA-EDF199D23D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77ED1699-FF19-4456-B6FA-EDF199D23D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77ED1699-FF19-4456-B6FA-EDF199D23D06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7} = {FCBF34D4-E147-4C38-A930-C4E036800E74}
+		{2B848571-A0A0-4463-BF91-2C8003F4FCF1} = {FCBF34D4-E147-4C38-A930-C4E036800E74}
+		{EB4CF549-023B-44E6-80AE-582EC0E2B676} = {FCBF34D4-E147-4C38-A930-C4E036800E74}
+		{77ED1699-FF19-4456-B6FA-EDF199D23D06} = {8451E7F4-3103-46E5-8687-AE8E61F48648}
 	EndGlobalSection
 EndGlobal
