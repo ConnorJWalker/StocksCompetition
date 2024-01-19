@@ -73,7 +73,6 @@ internal class AuthenticationService : IAuthenticationService
         var parsedToken = tokenHandler.ReadJwtToken(refreshToken);
         
         var userId = parsedToken.Claims.FirstOrDefault(claim => claim.Type == "Id");
-
         if (userId is null)
         {
             await _refreshTokenRepository.InvalidateFamily(storedRefreshToken.Family);
@@ -131,15 +130,16 @@ internal class AuthenticationService : IAuthenticationService
     /// <returns>Object containing the generated access and refresh tokens</returns>
     private AuthenticationResponse GenerateTokens(ApplicationUser user)
     {
+        var idClaim = new Claim("Id", user.Id.ToString());
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
-            new("Id", user.Id.ToString()),
-            new("DisplayName", user.DisplayName),
-            new("UserName", user.UserName!),
-            new("ProfilePicture", user.ProfilePicture),
-            new("DisplayColour", user.DisplayColour),
-            new("IsAdmin", user.IsAdmin.ToString())
+            new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
+            idClaim,
+            new Claim("DisplayName", user.DisplayName),
+            new Claim("UserName", user.UserName!),
+            new Claim("ProfilePicture", user.ProfilePicture),
+            new Claim("DisplayColour", user.DisplayColour),
+            new Claim("IsAdmin", user.IsAdmin.ToString())
         };
 
         var accessTokenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_environmentSettings.Jwt.Key));
@@ -156,7 +156,7 @@ internal class AuthenticationService : IAuthenticationService
         var refreshToken = new JwtSecurityToken(
             _environmentSettings.Jwt.Issuer,
             _environmentSettings.Jwt.Audience,
-            [claims[0]],
+            [idClaim],
             DateTime.Now,
             DateTime.Now.AddDays(_environmentSettings.Jwt.RefreshTokenLifetimeDays),
             new SigningCredentials(refreshTokenKey, SecurityAlgorithms.HmacSha256)

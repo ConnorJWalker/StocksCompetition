@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using static InfrastructureUnitTests.TestUtilities.GetConfiguration;
 using static InfrastructureUnitTests.TestUtilities.GetDependencies;
 using Microsoft.AspNetCore.Identity;
@@ -15,23 +16,13 @@ public class LogInTests
     private readonly IRefreshTokenRepository _refreshTokenRepository = Substitute.For<IRefreshTokenRepository>();
     private readonly IMemoryCache _memoryCache = Substitute.For<IMemoryCache>();
     
-    private readonly ApplicationUser _user = new ApplicationUser
-    {
-        Id = 1,
-        DisplayName = "Test User",
-        UserName = "TestUser",
-        ProfilePicture = "Profile Picture",
-        DisplayColour = "#d94eb8",
-        IsAdmin = false
-    };
-    
     private const string ErrorMessage = "Email or Password is incorrect";
     
     [Fact]
     public async Task LogIn_Success()
     {
         // Arrange
-        _userManager.FindByEmailAsync(Arg.Any<string>()).Returns(Task.FromResult<ApplicationUser?>(_user));
+        _userManager.FindByEmailAsync(Arg.Any<string>()).Returns(Task.FromResult<ApplicationUser?>(TestUser));
         _userManager.CheckPasswordAsync(Arg.Any<ApplicationUser>(), Arg.Any<string>()).Returns(Task.FromResult(true));
         
         var authenticationService = new SCAuthenticationService(_userManager, EnvironmentSettings, _refreshTokenRepository, _memoryCache);
@@ -44,6 +35,35 @@ public class LogInTests
         Assert.True(result.Success);
     }
 
+    [Fact]
+    public async Task LogIn_SuccessContainsCorrectClaims()
+    {
+        // Arrange
+        _userManager.FindByEmailAsync(Arg.Any<string>()).Returns(Task.FromResult<ApplicationUser?>(TestUser));
+        _userManager.CheckPasswordAsync(Arg.Any<ApplicationUser>(), Arg.Any<string>()).Returns(Task.FromResult(true));
+        
+        var authenticationService = new SCAuthenticationService(_userManager, EnvironmentSettings, _refreshTokenRepository, _memoryCache);
+        var logInRequest = new LogInRequest { Email = "test@test.com", Password = "TestPassword" };
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        
+        // Act
+        var result = await authenticationService.LogIn(logInRequest);
+        var parsedAccessToken = tokenHandler.ReadJwtToken(result.Content?.AccessToken);
+        var parsedRefreshToken = tokenHandler.ReadJwtToken(result.Content?.RefreshToken);
+        
+        // Assert
+        Assert.NotNull(result.Content);
+        Assert.NotNull(parsedAccessToken.Claims.FirstOrDefault(claim => claim.Type == "iat"));
+        Assert.Equal(TestUser.Id.ToString(), parsedAccessToken.Claims.First(claim => claim.Type == "Id").Value);
+        Assert.Equal(TestUser.DisplayName, parsedAccessToken.Claims.First(claim => claim.Type == "DisplayName").Value);
+        Assert.Equal(TestUser.UserName, parsedAccessToken.Claims.First(claim => claim.Type == "UserName").Value);
+        Assert.Equal(TestUser.ProfilePicture, parsedAccessToken.Claims.First(claim => claim.Type == "ProfilePicture").Value);
+        Assert.Equal(TestUser.DisplayName, parsedAccessToken.Claims.First(claim => claim.Type == "DisplayName").Value);
+        Assert.Equal(TestUser.IsAdmin.ToString(), parsedAccessToken.Claims.First(claim => claim.Type == "IsAdmin").Value);
+        Assert.Equal(TestUser.Id.ToString(), parsedRefreshToken.Claims.First(claim => claim.Type == "Id").Value);
+    }
+    
     [Fact]
     public async Task LogIn_EmailNotFound()
     {
