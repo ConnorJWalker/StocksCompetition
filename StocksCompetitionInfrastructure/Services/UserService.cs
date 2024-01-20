@@ -36,7 +36,7 @@ internal class UserService : IUserService
         var userCreatedResult = await _userManager.CreateAsync(user, signUpRequest.Password);
         return userCreatedResult.Succeeded
             ? Result<bool>.FromSuccess(true)
-            : Result<bool>.FromFailed(500, "Could not create user account");
+            : Result<bool>.FromFailed(500, "An error occured attempting to create account");
     }
 
     /// <inheritdoc />
