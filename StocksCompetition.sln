@@ -1,16 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetition.Api", "StocksCompetition.Api\StocksCompetition.Api.csproj", "{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StocksCompetition.Api", "StocksCompetition.Api\StocksCompetition.Api.csproj", "{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetition.Core", "StocksCompetition.Core\StocksCompetition.Core.csproj", "{2B848571-A0A0-4463-BF91-2C8003F4FCF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StocksCompetition.Core", "StocksCompetition.Core\StocksCompetition.Core.csproj", "{2B848571-A0A0-4463-BF91-2C8003F4FCF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetition.Infrastructure", "StocksCompetition.Infrastructure\StocksCompetition.Infrastructure.csproj", "{EB4CF549-023B-44E6-80AE-582EC0E2B676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StocksCompetition.Infrastructure", "StocksCompetition.Infrastructure\StocksCompetition.Infrastructure.csproj", "{EB4CF549-023B-44E6-80AE-582EC0E2B676}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{FCBF34D4-E147-4C38-A930-C4E036800E74}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8451E7F4-3103-46E5-8687-AE8E61F48648}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetition.InfrastructureUnitTests", "StocksCompetition.InfrastructureUnitTests\StocksCompetition.InfrastructureUnitTests.csproj", "{77ED1699-FF19-4456-B6FA-EDF199D23D06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StocksCompetition.InfrastructureUnitTests", "StocksCompetition.InfrastructureUnitTests\StocksCompetition.InfrastructureUnitTests.csproj", "{77ED1699-FF19-4456-B6FA-EDF199D23D06}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "StocksCompetition.Ui", "StocksCompetition.Ui\StocksCompetition.Ui.esproj", "{C7A28870-285D-4703-A3D4-C673112C116E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,11 +39,23 @@ Global
 		{77ED1699-FF19-4456-B6FA-EDF199D23D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77ED1699-FF19-4456-B6FA-EDF199D23D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77ED1699-FF19-4456-B6FA-EDF199D23D06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7A28870-285D-4703-A3D4-C673112C116E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7A28870-285D-4703-A3D4-C673112C116E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7A28870-285D-4703-A3D4-C673112C116E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C7A28870-285D-4703-A3D4-C673112C116E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7A28870-285D-4703-A3D4-C673112C116E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7A28870-285D-4703-A3D4-C673112C116E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7} = {FCBF34D4-E147-4C38-A930-C4E036800E74}
 		{2B848571-A0A0-4463-BF91-2C8003F4FCF1} = {FCBF34D4-E147-4C38-A930-C4E036800E74}
 		{EB4CF549-023B-44E6-80AE-582EC0E2B676} = {FCBF34D4-E147-4C38-A930-C4E036800E74}
 		{77ED1699-FF19-4456-B6FA-EDF199D23D06} = {8451E7F4-3103-46E5-8687-AE8E61F48648}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B9DF37B-DE44-4176-9035-6324F625DFB7}
 	EndGlobalSection
 EndGlobal
