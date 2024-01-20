@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetitionApi", "StocksCompetitionApi\StocksCompetitionApi.csproj", "{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetition.Api", "StocksCompetition.Api\StocksCompetition.Api.csproj", "{2556EFFE-3F6E-4BB6-A1E6-2E2D8E38E6E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetitionCore", "StocksCompetitionCore\StocksCompetitionCore.csproj", "{2B848571-A0A0-4463-BF91-2C8003F4FCF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetition.Core", "StocksCompetition.Core\StocksCompetition.Core.csproj", "{2B848571-A0A0-4463-BF91-2C8003F4FCF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetitionInfrastructure", "StocksCompetitionInfrastructure\StocksCompetitionInfrastructure.csproj", "{EB4CF549-023B-44E6-80AE-582EC0E2B676}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetition.Infrastructure", "StocksCompetition.Infrastructure\StocksCompetition.Infrastructure.csproj", "{EB4CF549-023B-44E6-80AE-582EC0E2B676}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{FCBF34D4-E147-4C38-A930-C4E036800E74}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8451E7F4-3103-46E5-8687-AE8E61F48648}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureUnitTests", "InfrastructureUnitTests\InfrastructureUnitTests.csproj", "{77ED1699-FF19-4456-B6FA-EDF199D23D06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StocksCompetition.InfrastructureUnitTests", "StocksCompetition.InfrastructureUnitTests\StocksCompetition.InfrastructureUnitTests.csproj", "{77ED1699-FF19-4456-B6FA-EDF199D23D06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
