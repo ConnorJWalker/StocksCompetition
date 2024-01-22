@@ -1,11 +1,11 @@
 import { MockGraph } from '@components/authentication/mock-graph'
-import { AuthenticationOptions } from '@components/authentication/authentication-options'
+import { AuthenticationInputs } from '@components/authentication/authentication-inputs'
 
 export const Authentication = () => {
     return (
         <div className='authentication-container'>
             <MockGraph />
-            <AuthenticationOptions />
+            <AuthenticationInputs />
         </div>
     )
 }

@@ -33,10 +33,15 @@ body {
     padding: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Work Sans', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
     margin: 0 0 0.5em;
+    letter-spacing: 1px;
 }
 
 button {
@@ -62,6 +67,16 @@ button:focus-visible {
     height: 100vh;
 }
 
+.mock-graph-container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.mock-graph-container .graph {
+    aspect-ratio: 16/9;
+    width: 100%;
+}
+
 .authentication-container .divider {
     display: flex;
     align-items: center;
@@ -71,6 +86,10 @@ button:focus-visible {
     border-top: 1px solid white;
     flex: 1;
     height: 0;
+}
+
+.authentication-inputs-container {
+    min-width: 520px;
 }
 
 .authentication-container .divider p {
@@ -99,4 +118,21 @@ button:focus-visible {
     align-items: center;
     gap: 12px;
     width: 20em;
+}
+
+.authentication-container input[type=text],
+.authentication-container input[type=password], 
+.authentication-container input[type=email] {
+    padding: 0.75em;
+    margin-bottom: 1em;
+}
+
+.authentication-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.authentication-form-container footer {
+    display: flex;
+    justify-content: space-between;
 }

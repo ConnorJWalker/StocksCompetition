@@ -1,12 +1,14 @@
-export const AuthenticationOptions = () => {
+import AuthenticationFormProps from '@models/authentication/authentication-form-props'
+import { AuthenticationFormType } from '@models/authentication/authentication-form-type'
+
+export const AuthenticationOptions = ({ changeForm }: AuthenticationFormProps) => {
     return (
-        <div className='authentication-options-container'>
-            <h1>Stocks Competition</h1>
+        <>
             <section className='api-authentication-buttons'>
-                <button>Sign Up</button>
-                <button>Log In</button>
+                <button onClick={() => changeForm(AuthenticationFormType.SignupCredentials)}>Sign Up</button>
+                <button onClick={() => changeForm(AuthenticationFormType.Login)}>Log In</button>
             </section>
-            
+
             <div className='divider'>
                 <span></span>
                 <p>OR</p>
@@ -27,6 +29,6 @@ export const AuthenticationOptions = () => {
                     <p>Sign in with Facebook</p>
                 </button>
             </section>
-        </div>
+        </>
     )
 }
