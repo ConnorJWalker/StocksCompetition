@@ -57,20 +57,24 @@ h1, h2 {
     letter-spacing: 1px;
 }
 
+h3 {
+    margin: 0;
+}
+
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
     margin: 0 0 0.25em;
 }
 
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password], input[type=email], textarea {
     padding: 0.75em;
     margin-bottom: 1em;
     background-color: var(--background-colour);
     border: 1px solid var(--text-colour);
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, textarea:focus {
     border: 1px solid var(--primary-colour);
     outline: none;
     box-shadow: 0 0 5px 1px var(--primary-colour);
@@ -193,4 +197,20 @@ button.link {
 .authentication-form-container .display-colour-field {
     padding: 1.4em;
     margin-bottom: 1em;
+}
+
+.authentication-form-container .api-key-instructions {
+    line-height: 1.6;
+    list-style-position: inside;
+    padding: 0;
+}
+
+.authentication-form-container textarea {
+    resize: none;
+    margin-bottom: 1em;
+}
+
+.authentication-form-container .without-key {
+    margin-top: 1em;
+    text-align: right;
 }
