@@ -10,8 +10,16 @@ export const LoginForm = ({ changeForm }: AuthenticationFormProps) => {
             <input id='password' type='password'/>
 
             <footer>
-                <button onClick={() => changeForm(AuthenticationFormType.AuthenticationInputs)}>Back</button>
-                <button onClick={() => changeForm(AuthenticationFormType.SignupDisplayDetails)}>Log In</button>
+                <button 
+                    className='link'
+                    onClick={() => changeForm(AuthenticationFormType.AuthenticationInputs)}>
+                    Don't have an account? Sign up!
+                </button>
+                <button 
+                    className='action'
+                    onClick={() => changeForm(AuthenticationFormType.SignupDisplayDetails)}>
+                    Log In
+                </button>
             </footer>
         </div>
     )

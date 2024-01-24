@@ -3,6 +3,7 @@ import { AuthenticationFormType } from '@models/authentication/authentication-fo
 import { AuthenticationOptions } from '@components/authentication/authentication-options'
 import { LoginForm } from '@components/authentication/forms/login-form'
 import { SignupCredentialsForm } from '@components/authentication/forms/signup-credentials-form'
+import { DisplayDetailsForm } from '@components/authentication/forms/display-details-form.tsx'
 
 export const AuthenticationInputs = () => {
     const [currentForm, setCurrentForm] = useState(AuthenticationFormType.AuthenticationInputs)
@@ -13,13 +14,14 @@ export const AuthenticationInputs = () => {
         [AuthenticationFormType.AuthenticationInputs]: <AuthenticationOptions changeForm={changeForm} />,
         [AuthenticationFormType.Login]: <LoginForm changeForm={changeForm} />,
         [AuthenticationFormType.SignupCredentials]: <SignupCredentialsForm changeForm={changeForm} />,
-        [AuthenticationFormType.SignupDisplayDetails]: <h1>TODO</h1>,
+        [AuthenticationFormType.SignupDisplayDetails]: <DisplayDetailsForm changeForm={changeForm} />,
         [AuthenticationFormType.SignupApiKey]: <h1>TODO</h1>,
     }
     
     return (
         <div className='authentication-inputs-container'>
             <h1>Stocks Competition</h1>
+            <h2>It's all downhill from here...</h2>
             { forms[currentForm] }
         </div>
     )

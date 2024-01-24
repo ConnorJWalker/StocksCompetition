@@ -12,8 +12,14 @@ export const SignupCredentialsForm = ({ changeForm }: AuthenticationFormProps) =
             <input id='confirm-password' type='password'/>
 
             <footer>
-                <button onClick={() => changeForm(AuthenticationFormType.AuthenticationInputs)}>Back</button>
-                <button onClick={() => changeForm(AuthenticationFormType.SignupDisplayDetails)}>Next</button>
+                <button 
+                    className='link'
+                    onClick={() => changeForm(AuthenticationFormType.AuthenticationInputs)}>
+                    Already have an account? Log in!
+                </button>
+                <button 
+                    className='action'
+                    onClick={() => changeForm(AuthenticationFormType.SignupDisplayDetails)}>Next</button>
             </footer>
         </div>
     )

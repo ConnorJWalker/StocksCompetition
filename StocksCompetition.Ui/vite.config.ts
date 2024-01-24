@@ -8,7 +8,8 @@ export default defineConfig({
         alias: [
             { find: '@components', replacement: path.resolve(__dirname, 'src', 'components') },
             { find: '@pages', replacement: path.resolve(__dirname, 'src', 'pages') },
-            { find: '@models', replacement: path.resolve(__dirname, 'src', 'models') }
+            { find: '@models', replacement: path.resolve(__dirname, 'src', 'models') },
+            { find: '@utilities', replacement: path.resolve(__dirname, 'src', 'utilities') }
         ]
     }
 })

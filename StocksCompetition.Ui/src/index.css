@@ -2,15 +2,31 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
+
+    --text-colour: #e4f1e6;
+    --background-colour: #0f1a10;
+    --primary-colour: #9ed9a7;
+    --secondary-colour: #3a6959;
+    --accent-colour: #73b0a4;
     
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    color: var(--text-colour);
+    background-color: var(--background-colour);
     
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --text-colour: #0e1b10;
+        --background-colour: #e5f0e6;
+        --primary-colour: #255f2e;
+        --secondary-colour: #96c5b5;
+        --accent-colour: #4f8c80;
+    }
 }
 
 #root {
@@ -21,7 +37,7 @@
 
 a {
     font-weight: 500;
-    color: #646cff;
+    color: var(--accent-colour);
     text-decoration: inherit;
 }
 a:hover {
@@ -37,17 +53,39 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Work Sans', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+h1, h2 {
+    letter-spacing: 1px;
+}
+
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
-    margin: 0 0 0.5em;
-    letter-spacing: 1px;
+    margin: 0 0 0.25em;
+}
+
+input[type=text], input[type=password], input[type=email] {
+    padding: 0.75em;
+    margin-bottom: 1em;
+    background-color: var(--background-colour);
+    border: 1px solid var(--text-colour);
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    border: 1px solid var(--primary-colour);
+    outline: none;
+    box-shadow: 0 0 5px 1px var(--primary-colour);
+}
+
+label {
+    margin-bottom: 0.25em;
+    cursor: pointer;
 }
 
 button {
     border: none;
-    padding: 0.6em 1.2em;
+    padding: 1em 5em;
     cursor: pointer;
+    background-color: var(--secondary-colour);
 }
 
 button:hover {
@@ -56,6 +94,19 @@ button:hover {
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+}
+
+button.action {
+    background-color: var(--primary-colour);
+    color: var(--background-colour);
+}
+
+button.link {
+    background-color: transparent;
+    color: var(--accent-colour);
+    padding: unset;
+    text-decoration: underline;
+    font-weight: 500;
 }
 
 /* Authentication Page */
@@ -83,7 +134,7 @@ button:focus-visible {
 }
 
 .authentication-container .divider span {
-    border-top: 1px solid white;
+    border-top: 1px solid var(--text-colour);
     flex: 1;
     height: 0;
 }
@@ -105,6 +156,7 @@ button:focus-visible {
 .api-authentication-buttons button {
     width: 15em;
     padding: 1em 1.2em;
+    margin: 0 auto;
 }
 
 .oauth-buttons img {
@@ -118,13 +170,7 @@ button:focus-visible {
     align-items: center;
     gap: 12px;
     width: 20em;
-}
-
-.authentication-container input[type=text],
-.authentication-container input[type=password], 
-.authentication-container input[type=email] {
-    padding: 0.75em;
-    margin-bottom: 1em;
+    margin: 0 auto;
 }
 
 .authentication-form-container {
@@ -135,4 +181,16 @@ button:focus-visible {
 .authentication-form-container footer {
     display: flex;
     justify-content: space-between;
+}
+
+.authentication-form-container .profile-picture {
+    width: 25%;
+    aspect-ratio: 1;
+    background-color: var(--accent-colour);
+    margin: 0 auto 1em;
+}
+
+.authentication-form-container .display-colour-field {
+    padding: 1.4em;
+    margin-bottom: 1em;
 }

@@ -6,7 +6,11 @@ export const AuthenticationOptions = ({ changeForm }: AuthenticationFormProps) =
         <>
             <section className='api-authentication-buttons'>
                 <button onClick={() => changeForm(AuthenticationFormType.SignupCredentials)}>Sign Up</button>
-                <button onClick={() => changeForm(AuthenticationFormType.Login)}>Log In</button>
+                <button 
+                    className='action' 
+                    onClick={() => changeForm(AuthenticationFormType.Login)}>
+                    Log In
+                </button>
             </section>
 
             <div className='divider'>
