@@ -24,7 +24,7 @@ export const DisplayDetailsForm = ({ changeForm }: AuthenticationFormProps) => {
                     id='display-colour'
                     type='color'
                     value={colour}
-                    onChange={e => { console.log(e.target); setColour(e.target.value)}} />
+                    onChange={e => setColour(e.target.value)} />
             </label>
             
             <footer>
