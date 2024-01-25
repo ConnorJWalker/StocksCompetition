@@ -1,6 +1,7 @@
-import { Line } from 'react-chartjs-2'
 import { useEffect, useState } from 'react'
 import { ChartData } from 'chart.js'
+import { Line } from 'react-chartjs-2'
+import { useAuthenticationFormsContext } from '@context/authentication-forms-context'
 
 const pointsCount = 100
 const variation = 5
@@ -15,9 +16,6 @@ const options = {
     plugins: {
         legend: {
             display: false
-        },
-        axis: {
-            
         }
     },
     scales: {
@@ -66,28 +64,49 @@ const options = {
 }
 
 export const MockGraph = () => {
+    const formData = useAuthenticationFormsContext()
+    
+    const [renderColour, setRenderColour] = useState(formData.displayColour)
     const [data, setData] = useState<ChartData<'line', number[]>>()
     
-    useEffect(() => {
-        const generatedData = []
-        
+    const labels = new Array(pointsCount).fill('')
+    
+    const generateChartValues = (): number[] => {
+        const generatedData: number[] = []
         let previous = 100
+        
         for (let i = 0; i < pointsCount; i++) {
             previous += variation - Math.random() * variationMultiplier
             generatedData.push(previous)
         }
         
-        setData({
-            labels: new Array(pointsCount).fill(''),
-            datasets: [{
-                label: 'Account Value',
-                data: generatedData,
-                borderColor: '#ff0000',
-                backgroundColor: '#ff0000',
-                pointRadius: 0
-            }]
-        })
+        return generatedData
+    }
+
+    const toDataSet = (colour: string, data: number[]): ChartData<'line', number[]> => ({
+        labels,
+        datasets: [{
+            label: 'Account Value',
+            data: data,
+            borderColor: colour,
+            backgroundColor: colour,
+            pointRadius: 0
+        }]
+    })
+    
+    useEffect(() => {
+        const generatedData = generateChartValues()
+        setData(toDataSet(formData.displayColour, generatedData))
     }, [])
+    
+    useEffect(() => {
+        const interval = setInterval(() => setRenderColour(formData.displayColour), 200)
+        return () => clearInterval(interval)
+    }, [formData])
+
+    useEffect(() => {
+        setData(toDataSet(renderColour, data?.datasets[0].data || generateChartValues()))
+    }, [renderColour])
     
     return (
         <div className='mock-graph-container'>

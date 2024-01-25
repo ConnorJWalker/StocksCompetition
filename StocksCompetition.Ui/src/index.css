@@ -203,6 +203,10 @@ button.link {
     margin: 0 auto 1em;
 }
 
+.authentication-form-container .profile-picture {
+    text-align: center;
+}
+
 .authentication-form-container .display-colour-field {
     padding: 1.4em;
     margin-bottom: 1em;

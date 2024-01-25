@@ -1,11 +1,12 @@
-import AuthenticationFormProps from '@models/authentication/authentication-form-props.ts'
-import { AuthenticationFormType } from '@models/authentication/authentication-form-type.ts'
-import { useState } from 'react'
-import { randomColour } from '@utilities/random-colour.ts'
+import { useContext } from 'react'
+import AuthenticationFormProps from '@models/authentication/authentication-form-props'
+import { AuthenticationFormType } from '@models/authentication/authentication-form-type'
+import { AuthenticationFormsContext, useAuthenticationFormsContext } from '@context/authentication-forms-context'
 
 export const DisplayDetailsForm = ({ changeForm }: AuthenticationFormProps) => {
-    const [colour, setColour] = useState<string>(randomColour())
-    
+    const formData = useAuthenticationFormsContext()
+    const { setFormData } = useContext(AuthenticationFormsContext)
+
     return (
         <div className='authentication-form-container'>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='profile-picture'>
@@ -18,13 +19,13 @@ export const DisplayDetailsForm = ({ changeForm }: AuthenticationFormProps) => {
             <input id='display-name' type='text'/>
             
             <label htmlFor='display-colour'>Display Colour</label>
-            <label className='display-colour-field' htmlFor='display-colour' style={{ backgroundColor: colour }}>
+            <label tabIndex={0} className='display-colour-field' htmlFor='display-colour' style={{ backgroundColor: formData.displayColour }}>
                 <input
-                    hidden 
+                    hidden
                     id='display-colour'
                     type='color'
-                    value={colour}
-                    onChange={e => setColour(e.target.value)} />
+                    value={formData.displayColour}
+                    onChange={ e => setFormData({ ...formData, displayColour: e.target.value }) } />
             </label>
             
             <footer>
