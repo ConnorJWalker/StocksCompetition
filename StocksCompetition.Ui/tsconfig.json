@@ -27,7 +27,8 @@
             "@components/*": [ "./components/*" ],
             "@models/*": [ "./models/*" ],
             "@utilities/*": [ "./utilities/*" ],
-            "@context/*": [ "./context/*" ]
+            "@context/*": [ "./context/*" ],
+            "@providers/*": [ "./providers/*" ]
         }
     },
     "include": ["src"],

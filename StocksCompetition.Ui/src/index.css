@@ -2,18 +2,8 @@
     font-family: 'Lexend Exa', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-
-    --text-colour: #d2e0f9;
-    --background-colour: #010813;
-    --background--colour-light: #08111e;
-    --primary-colour: #83adec;
-    --secondary-colour: #29148f;
-    --secondary-colour-light: #0d0c38;
-    --accent-colour: #c04fd0;
     
     color-scheme: light dark;
-    color: var(--text-colour);
-    background-color: var(--background-colour);
     
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -21,16 +11,30 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --text-colour: #06142d;
-        --background-colour: #ecf3fe;
-        --background--colour-light: #e1eaf7;
-        --primary-colour: #133d7c;
-        --secondary-colour: #8570eb;
-        --secondary-colour-light: #cdccf9;
-        --accent-colour: #a22fb1;
-    }
+body {
+    --text-colour: #d2e0f9;
+    --background-colour: #010813;
+    --background--colour-light: #08111e;
+    --primary-colour: #83adec;
+    --secondary-colour: #29148f;
+    --secondary-colour-light: #0d0c38;
+    --accent-colour: #c04fd0;
+
+    color: var(--text-colour);
+    background-color: var(--background-colour);
+    
+    margin: 0;
+    padding: 0;
+}
+
+body[data-theme=light] {
+    --text-colour: #06142d;
+    --background-colour: #ecf3fe;
+    --background--colour-light: #e1eaf7;
+    --primary-colour: #133d7c;
+    --secondary-colour: #8570eb;
+    --secondary-colour-light: #cdccf9;
+    --accent-colour: #a22fb1;
 }
 
 #root {
@@ -50,11 +54,6 @@ a {
 }
 a:hover {
     color: #535bf2;
-}
-
-body {
-    margin: 0;
-    padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -130,8 +129,12 @@ button.link {
     height: 100vh;
 }
 
-.mock-graph-container {
+.authentication-container .left {
     max-width: 1200px;
+    width: 100%;
+}
+
+.mock-graph-container {
     width: 100%;
 }
 
@@ -139,6 +142,28 @@ button.link {
     aspect-ratio: 16/9;
     width: 100%;
     background-color: var(--background--colour-light);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-top: 1em;
+    background-color: var(--secondary-colour);
+}
+
+.theme-toggle svg {
+    width: 2.5em;
+    padding: 0.25em 0.5em 0.15em;
+    color: var(--background-colour);
+}
+
+.theme-toggle .icon-container {
+    background-color: var(--accent-colour);
+}
+
+.theme-toggle .text-container {
+    padding: 0 2em;
 }
 
 .authentication-container .divider {
