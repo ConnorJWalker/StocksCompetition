@@ -1,11 +1,10 @@
 import { useContext } from 'react'
 import AuthenticationFormProps from '@models/authentication/authentication-form-props'
 import { AuthenticationFormType } from '@models/authentication/authentication-form-type'
-import { AuthenticationFormsContext, useAuthenticationFormsContext } from '@context/authentication-forms-context'
+import { AuthenticationFormsContext } from '@context/authentication-forms-context'
 
 export const DisplayDetailsForm = ({ changeForm }: AuthenticationFormProps) => {
-    const formData = useAuthenticationFormsContext()
-    const { setFormData } = useContext(AuthenticationFormsContext)
+    const { formData, setFormData } = useContext(AuthenticationFormsContext)
 
     return (
         <div className='authentication-form-container'>
@@ -19,13 +18,18 @@ export const DisplayDetailsForm = ({ changeForm }: AuthenticationFormProps) => {
             <input id='display-name' type='text'/>
             
             <label htmlFor='display-colour'>Display Colour</label>
-            <label tabIndex={0} className='display-colour-field' htmlFor='display-colour' style={{ backgroundColor: formData.displayColour }}>
+            <label 
+                tabIndex={0}
+                className='display-colour-field' 
+                htmlFor='display-colour' 
+                style={{ backgroundColor: formData?.displayColour, marginTop: 0 }}>
+                
                 <input
                     hidden
                     id='display-colour'
                     type='color'
-                    value={formData.displayColour}
-                    onChange={ e => setFormData({ ...formData, displayColour: e.target.value }) } />
+                    value={formData?.displayColour}
+                    onChange={ e => setFormData({ displayColour: e.target.value }) } />
             </label>
             
             <footer>

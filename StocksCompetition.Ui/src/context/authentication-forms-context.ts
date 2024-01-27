@@ -3,7 +3,7 @@ import { AuthenticationFormContent } from '@models/authentication/authentication
 
 interface IAuthenticationFormsContext {
     formData: AuthenticationFormContent | null
-    setFormData: (newValue: AuthenticationFormContent) => void
+    setFormData: (newValue: object) => void
 }
 
 export const AuthenticationFormsContext = createContext<IAuthenticationFormsContext>({

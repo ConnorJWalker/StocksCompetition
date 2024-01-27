@@ -3,6 +3,8 @@
     line-height: 1.5;
     font-weight: 400;
     
+    --danger-colour: #d13232;
+    
     color-scheme: light dark;
     
     font-synthesis: none;
@@ -76,9 +78,9 @@ h1 {
 
 input[type=text], input[type=password], input[type=email], textarea {
     padding: 0.75em;
-    margin-bottom: 1em;
     background-color: var(--background-colour);
     border: 1px solid var(--text-colour);
+    color: var(--text-colour);
 }
 
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, textarea:focus {
@@ -216,9 +218,18 @@ button.link {
     flex-direction: column;
 }
 
+.authentication-form-container label {
+    margin-top: 1em;
+}
+
+.authentication-form-container label:first-of-type {
+    margin-top: 0;
+}
+
 .authentication-form-container footer {
     display: flex;
     justify-content: space-between;
+    margin-top: 1em;
 }
 
 .authentication-form-container .profile-picture {
@@ -251,4 +262,15 @@ button.link {
 .authentication-form-container .without-key {
     margin-top: 1em;
     text-align: right;
+}
+
+.validation-errors {
+    color: var(--danger-colour);
+    padding: 0;
+    margin: 0;
+    list-style-position: inside;
+}
+
+.validation-errors li {
+    margin-top: 0.25em;
 }
