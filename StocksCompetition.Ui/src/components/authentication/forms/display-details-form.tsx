@@ -1,9 +1,14 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import AuthenticationFormProps from '@models/authentication/authentication-form-props'
 import { AuthenticationFormType } from '@models/authentication/authentication-form-type'
 import { AuthenticationFormsContext } from '@context/authentication-forms-context'
+import { ValidationErrors } from '@components/authentication/forms/ValidationErrors'
+import { SignupValidator } from '@utilities/signup-validator'
 
 export const DisplayDetailsForm = ({ changeForm }: AuthenticationFormProps) => {
+    const [usernameErrors, setUsernameErrors] = useState<string[]>([])
+    const [displayNameErrors, setDisplayNameErrors] = useState<string[]>([])
+    
     const { formData, setFormData } = useContext(AuthenticationFormsContext)
 
     return (
@@ -13,9 +18,22 @@ export const DisplayDetailsForm = ({ changeForm }: AuthenticationFormProps) => {
             </div>
             
             <label htmlFor='username'>Username</label>
-            <input id='username' type='text'/>
+            <input 
+                id='username'
+                type='text'
+                value={formData?.username}
+                onChange={e => setFormData({ username: e.target.value })}
+                onBlur={async e => setUsernameErrors(await SignupValidator.username(e.target.value))} />
+            <ValidationErrors errors={usernameErrors} />
+            
             <label htmlFor='display-name'>Display Name</label>
-            <input id='display-name' type='text'/>
+            <input 
+                id='display-name'
+                type='text'
+                value={formData?.displayName}
+                onChange={e => setFormData({ displayName: e.target.value })}
+                onBlur={e => setDisplayNameErrors(SignupValidator.displayName(e.target.value))} />
+            <ValidationErrors errors={displayNameErrors} />
             
             <label htmlFor='display-colour'>Display Colour</label>
             <label 
