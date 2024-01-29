@@ -45,7 +45,7 @@ body[data-theme=light] {
     overflow: hidden;
 }
 
-input, textarea, button {
+input, textarea, button, select, option {
     font-family: inherit;
 }
 
@@ -254,11 +254,6 @@ button.link {
     padding: 0;
 }
 
-.authentication-form-container textarea {
-    resize: none;
-    margin-bottom: 1em;
-}
-
 .authentication-form-container .without-key {
     margin-top: 1em;
     text-align: right;
@@ -273,4 +268,32 @@ button.link {
 
 .validation-errors li {
     margin-top: 0.25em;
+}
+
+/* API Key Input */
+.api-key-input {
+    display: flex;
+}
+
+.api-key-input:has(input:focus, select:focus) {
+    box-shadow: 0 0 5px 1px var(--primary-colour);
+}
+
+.api-key-input input {
+    flex: 1;
+    border-left: none;
+}
+
+.api-key-input input:focus {
+    box-shadow: none;
+    outline: none;
+    border: 1px solid var(--text-colour);
+    border-left: none;
+}
+
+.api-key-input select {
+    background-color: var(--secondary-colour);
+    border: 1px solid var(--text-colour);
+    border-right: none;
+    padding: 1em 2em;
 }

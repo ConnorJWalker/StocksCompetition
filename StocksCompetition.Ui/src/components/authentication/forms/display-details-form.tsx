@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import AuthenticationFormProps from '@models/authentication/authentication-form-props'
 import { AuthenticationFormType } from '@models/authentication/authentication-form-type'
 import { AuthenticationFormsContext } from '@context/authentication-forms-context'
-import { ValidationErrors } from '@components/authentication/forms/ValidationErrors'
+import { ValidationErrors } from '@components/authentication/forms/validation-errors'
 import { SignupValidator } from '@utilities/signup-validator'
 
 export const DisplayDetailsForm = ({ changeForm }: AuthenticationFormProps) => {

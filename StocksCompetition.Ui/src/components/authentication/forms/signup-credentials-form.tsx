@@ -3,7 +3,7 @@ import AuthenticationFormProps from '@models/authentication/authentication-form-
 import { AuthenticationFormType } from '@models/authentication/authentication-form-type'
 import { SignupValidator } from '@utilities/signup-validator'
 import { AuthenticationFormsContext } from '@context/authentication-forms-context'
-import { ValidationErrors } from '@components/authentication/forms/ValidationErrors'
+import { ValidationErrors } from '@components/authentication/forms/validation-errors'
 
 export const SignupCredentialsForm = ({ changeForm }: AuthenticationFormProps) => {
     const [emailErrors, setEmailErrors] = useState<string[]>([])

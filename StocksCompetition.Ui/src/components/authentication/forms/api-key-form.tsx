@@ -1,5 +1,6 @@
-import AuthenticationFormProps from '@models/authentication/authentication-form-props.ts'
-import { AuthenticationFormType } from '@models/authentication/authentication-form-type.ts'
+import AuthenticationFormProps from '@models/authentication/authentication-form-props'
+import { AuthenticationFormType } from '@models/authentication/authentication-form-type'
+import { ApiKeyInput } from '@components/authentication/forms/api-key-input'
 
 export const ApiKeyForm = ({ changeForm }: AuthenticationFormProps) => {
     const signupClick = () => {
@@ -14,13 +15,13 @@ export const ApiKeyForm = ({ changeForm }: AuthenticationFormProps) => {
         <div className='authentication-form-container'>
             <h3>Trading 212 Api Key</h3>
             <ul className='api-key-instructions'>
-                <li>Open Trading 212 into invest account (not ISA or CFD)</li>
+                <li>Open Trading 212 into desired account</li>
                 <li>Click Settings -&gt; Api (Beta) -&gt; Generate API Key</li>
-                <li>Set all permission toggle (except Orders - Execute) to on</li>
+                <li>Set all read permissions to on</li>
                 <li>Click Generate key and copy to the text area below</li>
             </ul>
-
-            <textarea rows={5}></textarea>
+            
+            <ApiKeyInput />
             
             <footer>
                 <button
